@@ -7,9 +7,9 @@
  * http://opensource.org/licenses/MIT
  * 
  * Author: Adam J De Lucia
- * Version: 1.0.0
- * Date: May 23 2014
- *  
+ * Version: 1.0.4
+ * Date: June 1 2014
+ * 
  */
 
 $.fn.isolate = function (options) {
@@ -31,26 +31,32 @@ $.fn.isolate = function (options) {
     var isolate = function () {
         currentIso = $(this).attr("id");
         iso = "." + $(this).attr("id");
+        active = "#" + $(this).attr("id");
         els = settings.isosBox.find($(settings.isoWrapper).not(iso));
 
         if (currentIso != oldIso && oldIso != "") {
             settings.isosBox.find($(settings.isoWrapper).not("." + oldIso)).show();
         }
 
+        activeFilter(active);
         els.toggle(0, rowStart);
+
         oldIso = $(this).attr("id");
     };
 
     var filter = function () {
         currentIso = $(this).attr("id");
         iso = "." + $(this).attr("id");
+        active = "#" + $(this).attr("id");
         el = settings.isosBox.find(iso);
 
         if (currentIso != oldIso && oldIso != "") {
-            $("." + oldIso).show();
+            settings.isosBox.find("." + oldIso).show();
         }
 
+        activeFilter(active);
         el.toggle(0, rowStart);
+
         oldIso = $(this).attr("id");
     };
 
@@ -71,6 +77,17 @@ $.fn.isolate = function (options) {
         settings.filtersBox.on("click.isolate", ".filter", filter);
     } else {
         settings.filtersBox.on("click.isolate", ".filter", isolate);
+    }
+
+    function activeFilter(selectedFilter) {
+        if (!settings.filtersBox.find(".filter").hasClass("active")) {
+            settings.filtersBox.find(selectedFilter).addClass("active");
+        } else if (!settings.filtersBox.find(selectedFilter).hasClass("active")) {
+            settings.filtersBox.find(".filter").removeClass("active");
+            settings.filtersBox.find(selectedFilter).addClass("active");
+        } else {
+            settings.filtersBox.find(".filter").removeClass("active");
+        }
     }
 
     function rowStart() {
@@ -95,6 +112,7 @@ $.fn.isolate = function (options) {
     var iso = "";
     var el = "";
     var els = "";
+    var active = "";
     var currentIso = "";
     var oldIso = "";
 };
