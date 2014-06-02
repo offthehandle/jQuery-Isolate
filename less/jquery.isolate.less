@@ -7,26 +7,27 @@
  * http://opensource.org/licenses/MIT
  * 
  * Author: Adam J De Lucia
- * Scaffolding Version: 1.0.0 (Isolate 1.0.4)
+ * Scaffolding Version: 1.0.0 (Isolate 1.0.5)
  * Date: June 1 2014
  * 
  */
 
 @isosID: ~"#iso-els";
 @filtersID: ~"#iso-filters";
+@filtersID2: ~"#myFilters";
 @bgColor: #fff;
 @bgHoverColor: rgb(48,120,144);
 @activeColor: lighten(rgb(144,216,240), 20%);
 @activeBG: darken(rgb(0,72,96), 5%);
 
-@{filtersID} .filters-header {
+@{filtersID} .filters-header, @{filtersID2} .filters-header {
     font-size: 18px;
     font-style: italic;
     text-transform: uppercase;
     margin: 0 0 15px;
 }
 
-@{filtersID} .filter {
+@{filtersID} .filter, @{filtersID2} .filter {
     cursor: pointer;
     font-size: 14px;
     color: @bgHoverColor;
