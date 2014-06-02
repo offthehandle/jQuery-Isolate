@@ -7,16 +7,58 @@
  * http://opensource.org/licenses/MIT
  * 
  * Author: Adam J De Lucia
- * Scaffolding Version: 0.3.0 (Isolate 1.0.4)
- * Date: May 25 2014
+ * Scaffolding Version: 1.0.0 (Isolate 1.0.4)
+ * Date: June 1 2014
  * 
  */
 
-.bs-2-row-start {
+@isosID: ~"#iso-els";
+@filtersID: ~"#iso-filters";
+@bgColor: #fff;
+@bgHoverColor: rgb(48,120,144);
+@activeColor: lighten(rgb(144,216,240), 20%);
+@activeBG: darken(rgb(0,72,96), 5%);
+
+@{filtersID} .filters-header {
+    font-size: 18px;
+    font-style: italic;
+    text-transform: uppercase;
+    margin: 0 0 15px;
+}
+
+@{filtersID} .filter {
+    cursor: pointer;
+    font-size: 14px;
+    color: @bgHoverColor;
+    text-align: center;
+    vertical-align: middle;
+    background-color: @bgColor;
+    border: solid 1px @bgHoverColor;
+    -webkit-border-radius: 6px;
+       -moz-border-radius: 6px;
+        -ms-border-radius: 6px;
+         -o-border-radius: 6px;
+    border-radius: 6px;
+    display: block;
+    margin-bottom: 15px;
+    padding: 6px 8px;
+
+    &:hover {
+        color: @bgColor;
+        background-color: @bgHoverColor;
+    }
+
+    &.active {
+        color: @activeColor;
+        background-color: @activeBG;
+    }
+}
+
+@{isosID} .bs-2-row-start {
     margin-left: 0;
 }
 
-[class*="iso-col-"] {
+@{isosID} [class*="iso-col-"] {
     position: relative;
     min-height: 1px;
     float: left;
@@ -24,50 +66,50 @@
     padding-right: 15px;
 }
 
-.iso-col-1 {
+@{isosID} .iso-col-1 {
     width: 8.33333333%;
 }
 
-.iso-col-2 {
+@{isosID} .iso-col-2 {
     width: 16.66666667%;
 }
 
-.iso-col-3 {
+@{isosID} .iso-col-3 {
     width: 25%;
 }
 
-.iso-col-4 {
+@{isosID} .iso-col-4 {
     width: 33.33333333%;
 }
 
-.iso-col-5 {
+@{isosID} .iso-col-5 {
     width: 20%;
 }
 
-.iso-col-6 {
+@{isosID} .iso-col-6 {
     width: 50%;
 }
 
-.iso-col-7 {
+@{isosID} .iso-col-7 {
     width: 58.33333333%;
 }
 
-.iso-col-8 {
+@{isosID} .iso-col-8 {
     width: 66.66666667%;
 }
 
-.iso-col-9 {
+@{isosID} .iso-col-9 {
     width: 75%;
 }
 
-.iso-col-10 {
+@{isosID} .iso-col-10 {
     width: 83.33333333%;
 }
 
-.iso-col-11 {
+@{isosID} .iso-col-11 {
     width: 91.66666667%;
 }
 
-.iso-col-12 {
+@{isosID} .iso-col-12 {
     width: 100%;
 }
