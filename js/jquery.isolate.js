@@ -7,8 +7,8 @@
  * http://opensource.org/licenses/MIT
  * 
  * Author: Adam J De Lucia
- * Version: 1.0.5
- * Date: June 1 2014
+ * Version: 1.1.0
+ * Date: September 25, 2014
  * 
  */
 
@@ -17,12 +17,14 @@ $.fn.isolate = function (options) {
         filtersBox: $("#iso-filters"),
         isosBox: $("#iso-els"),
         isoWrapper: "li",
+        filter: false,
         bootstrap: true,
         version: 3,
         breakpoint: "md",
-        columns: false,
         colSpan: 3,
-        filter: false
+        setup: null,
+        complete: null,
+        columns: false
     }, options);
 
     var str = settings.version.toString();
@@ -42,6 +44,8 @@ $.fn.isolate = function (options) {
         els.toggle(0, rowStart);
 
         oldIso = $(this).attr("id");
+
+        $.isFunction(settings.complete) && settings.complete.call(this);
     };
 
     var filter = function () {
@@ -58,6 +62,8 @@ $.fn.isolate = function (options) {
         el.toggle(0, rowStart);
 
         oldIso = $(this).attr("id");
+
+        $.isFunction(settings.complete) && settings.complete.call(this);
     };
 
     if (settings.bootstrap == true || settings.columns == true) {
@@ -72,6 +78,8 @@ $.fn.isolate = function (options) {
             settings.isosBox.find(settings.isoWrapper).addClass("iso-col-" + settings.colSpan);
         }
     }
+
+    $.isFunction(settings.setup) && settings.setup.call(this);
 
     if (settings.filter == true) {
         settings.filtersBox.on("click.isolate", ".filter", filter);
@@ -109,10 +117,10 @@ $.fn.isolate = function (options) {
         }
     }
 
-    var iso = "";
-    var el = "";
-    var els = "";
-    var active = "";
-    var currentIso = "";
-    var oldIso = "";
+    var iso = "",
+        el = "",
+        els = "",
+        active = "",
+        currentIso = "",
+        oldIso = "";
 };
