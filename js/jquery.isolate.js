@@ -7,8 +7,8 @@
  * http://opensource.org/licenses/MIT
  * 
  * Author: Adam J De Lucia
- * Version: 1.1.0
- * Date: September 25, 2014
+ * Version: 1.1.1
+ * Date: October 5, 2014
  * 
  */
 
@@ -32,8 +32,8 @@ $.fn.isolate = function (options) {
 
     var isolate = function () {
         currentIso = $(this).attr("id");
-        iso = "." + $(this).attr("id");
-        active = "#" + $(this).attr("id");
+        iso = "." + currentIso;
+        active = "#" + currentIso;
         els = settings.isosBox.find($(settings.isoWrapper).not(iso));
 
         if (currentIso != oldIso && oldIso != "") {
@@ -43,15 +43,15 @@ $.fn.isolate = function (options) {
         activeFilter(active);
         els.toggle(0, rowStart);
 
-        oldIso = $(this).attr("id");
+        oldIso = currentIso;
 
         $.isFunction(settings.complete) && settings.complete.call(this);
     };
 
     var filter = function () {
         currentIso = $(this).attr("id");
-        iso = "." + $(this).attr("id");
-        active = "#" + $(this).attr("id");
+        iso = "." + currentIso;
+        active = "#" + currentIso;
         el = settings.isosBox.find(iso);
 
         if (currentIso != oldIso && oldIso != "") {
@@ -61,7 +61,7 @@ $.fn.isolate = function (options) {
         activeFilter(active);
         el.toggle(0, rowStart);
 
-        oldIso = $(this).attr("id");
+        oldIso = currentIso;
 
         $.isFunction(settings.complete) && settings.complete.call(this);
     };
