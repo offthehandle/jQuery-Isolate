@@ -1,22 +1,24 @@
 ﻿/*
- * Scaffolding for Isolate Plugin (jQuery JavaScript Library)
+ * Scaffolding for jQuery Isolate Plugin
  * 
  * Copyright (c) 2014 Adam J De Lucia
  * Licensed under the MIT License.
  * http://opensource.org/licenses/MIT
  * 
  * Author: Adam J De Lucia
- * Scaffolding Version: 1.0.1 (Isolate 1.1.1)
- * Date: September 23 2014
+ * Scaffolding Version: 1.0.1 (Isolate 1.2.0)
+ * Date: November 28, 2014
  * 
  */
-#iso-filters .filters-header {
+#iso-filters .filters-header,
+#myFilters .filters-header {
   font-size: 18px;
   font-style: italic;
   text-transform: uppercase;
   margin: 0 0 15px;
 }
-#iso-filters .filter {
+#iso-filters .filter,
+#myFilters .filter {
   cursor: pointer;
   font-size: 14px;
   color: #307890;
@@ -33,11 +35,13 @@
   margin-bottom: 15px;
   padding: 6px 8px;
 }
-#iso-filters .filter:hover {
+#iso-filters .filter:hover,
+#myFilters .filter:hover {
   color: #ffffff;
   background-color: #307890;
 }
-#iso-filters .filter.active {
+#iso-filters .filter.active,
+#myFilters .filter.active {
   color: #eaf8fc;
   background-color: #003547;
 }

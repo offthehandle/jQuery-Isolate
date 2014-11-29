@@ -1,13 +1,13 @@
 ﻿/*
- * Scaffolding for Isolate Plugin (jQuery JavaScript Library)
+ * Scaffolding for jQuery Isolate Plugin
  * 
  * Copyright (c) 2014 Adam J De Lucia
  * Licensed under the MIT License.
  * http://opensource.org/licenses/MIT
  * 
  * Author: Adam J De Lucia
- * Scaffolding Version: 1.0.1 (Isolate 1.1.1)
- * Date: September 23 2014
+ * Scaffolding Version: 1.0.1 (Isolate 1.2.0)
+ * Date: November 28, 2014
  * 
  */
-#iso-filters .filters-header{font-size:18px;font-style:italic;text-transform:uppercase;margin:0 0 15px}#iso-filters .filter{cursor:pointer;font-size:14px;color:#307890;text-align:center;vertical-align:middle;background-color:#fff;border:solid 1px #307890;-webkit-border-radius:6px;-moz-border-radius:6px;-ms-border-radius:6px;-o-border-radius:6px;border-radius:6px;display:block;margin-bottom:15px;padding:6px 8px}#iso-filters .filter:hover{color:#fff;background-color:#307890}#iso-filters .filter.active{color:#eaf8fc;background-color:#003547}#iso-els .bs-2-row-start{margin-left:0}#iso-els [class*="iso-col-"]{position:relative;min-height:1px;float:left;padding-left:15px;padding-right:15px}#iso-els .iso-col-1{width:8.33333333%}#iso-els .iso-col-2{width:16.66666667%}#iso-els .iso-col-3{width:25%}#iso-els .iso-col-4{width:33.33333333%}#iso-els .iso-col-5{width:41.66666667%}#iso-els .iso-col-6{width:50%}#iso-els .iso-col-7{width:58.33333333%}#iso-els .iso-col-8{width:66.66666667%}#iso-els .iso-col-9{width:75%}#iso-els .iso-col-10{width:83.33333333%}#iso-els .iso-col-11{width:91.66666667%}#iso-els .iso-col-12{width:100%}
+#iso-filters .filters-header,#myFilters .filters-header{font-size:18px;font-style:italic;text-transform:uppercase;margin:0 0 15px}#iso-filters .filter,#myFilters .filter{cursor:pointer;font-size:14px;color:#307890;text-align:center;vertical-align:middle;background-color:#fff;border:solid 1px #307890;-webkit-border-radius:6px;-moz-border-radius:6px;-ms-border-radius:6px;-o-border-radius:6px;border-radius:6px;display:block;margin-bottom:15px;padding:6px 8px}#iso-filters .filter:hover,#myFilters .filter:hover{color:#fff;background-color:#307890}#iso-filters .filter.active,#myFilters .filter.active{color:#eaf8fc;background-color:#003547}#iso-els .bs-2-row-start{margin-left:0}#iso-els [class*="iso-col-"]{position:relative;min-height:1px;float:left;padding-left:15px;padding-right:15px}#iso-els .iso-col-1{width:8.33333333%}#iso-els .iso-col-2{width:16.66666667%}#iso-els .iso-col-3{width:25%}#iso-els .iso-col-4{width:33.33333333%}#iso-els .iso-col-5{width:41.66666667%}#iso-els .iso-col-6{width:50%}#iso-els .iso-col-7{width:58.33333333%}#iso-els .iso-col-8{width:66.66666667%}#iso-els .iso-col-9{width:75%}#iso-els .iso-col-10{width:83.33333333%}#iso-els .iso-col-11{width:91.66666667%}#iso-els .iso-col-12{width:100%}
