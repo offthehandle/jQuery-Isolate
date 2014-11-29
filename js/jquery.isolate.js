@@ -7,120 +7,224 @@
  * http://opensource.org/licenses/MIT
  * 
  * Author: Adam J De Lucia
- * Version: 1.1.1
- * Date: October 5, 2014
+ * Version: 1.2.0
+ * Date: November 28, 2014
  * 
  */
 
 $.fn.isolate = function (options) {
-    var settings = $.extend({
-        filtersBox: $("#iso-filters"),
-        isosBox: $("#iso-els"),
-        isoWrapper: "li",
-        filter: false,
-        bootstrap: true,
-        version: 3,
-        breakpoint: "md",
-        colSpan: 3,
-        setup: null,
-        complete: null,
-        columns: false
-    }, options);
+    this.each(function () {
+        var settings = $.extend({
+            filtersBox: $("#iso-filters"),
+            isosBox: $("#iso-els"),
+            isoWrapper: "li",
+            filter: false,
+            bootstrap: true,
+            version: 3,
+            breakpoint: "md",
+            colSpan: 3,
+            setup: null,
+            start: null,
+            complete: null,
+            columns: false
+        }, options);
 
-    var str = settings.version.toString();
-    var version = str.substring(0, 1);
+        // Parses user inputted version down to the major release
+        var str = settings.version.toString();
+        var version = str.substring(0, 1);
 
-    var isolate = function () {
-        currentIso = $(this).attr("id");
-        iso = "." + currentIso;
-        active = "#" + currentIso;
-        els = settings.isosBox.find($(settings.isoWrapper).not(iso));
+        // Instantiates an object to track the state of available filters
+        var availableFiltersObj = makeFiltersObject();
 
-        if (currentIso != oldIso && oldIso != "") {
-            settings.isosBox.find($(settings.isoWrapper).not("." + oldIso)).show();
+        // Isolate method
+        var isolate = function () {
+            selectedFilter = $(this).attr("id");
+            isoClass = "." + selectedFilter;
+            filterID = "#" + selectedFilter;
+
+            var f = availableFiltersObj;
+
+            // Callback function before any filter actions begin
+            $.isFunction(settings.start) && settings.start.call(this);
+
+            // Resets all iso-els before isolating the selected ones
+            settings.isosBox.find(settings.isoWrapper).show();
+
+            // Handles faceted isolation
+            for (var item in f) {
+                if (item === selectedFilter && f[item] === "isInactive") {
+                    // Adds the selected class to the array isolated elements
+                    isolatedEls.push(isoClass);
+
+                    // Isolates the selected elements
+                    settings.isosBox.find($(settings.isoWrapper).not(isolatedEls.toString())).hide();
+                    rowStart();
+
+                    // Sets the filter state
+                    f[item] = "isActive";
+
+                    // Sets the active filter styles
+                    settings.filtersBox.find(filterID).addClass("active");
+                    break;
+                } else if (item === selectedFilter && f[item] === "isActive") {
+                    // Finds the selected active class in the array of isolated elements
+                    for (var i = 0, l = isolatedEls.length; i < l; i++) {
+                        if (isolatedEls[i] === isoClass) {
+                            // Removes the class from the array
+                            isolatedEls.splice(i, 1);
+                            break;
+                        }
+                    }
+
+                    // Isolates the selected elements if the array is not empty
+                    if (isolatedEls.length) {
+                        settings.isosBox.find($(settings.isoWrapper).not(isolatedEls.toString())).hide();
+                    }
+                    rowStart();
+
+                    // Sets the filter state
+                    f[item] = "isInactive";
+
+                    // Sets inactive filter styles
+                    settings.filtersBox.find(filterID).removeClass("active");
+                    break;
+                }
+            }
+
+            // Callback function after all filter actions are complete
+            $.isFunction(settings.complete) && settings.complete.call(this);
+        };
+
+        // Filter method
+        var filter = function () {
+            selectedFilter = $(this).attr("id");
+            isoClass = "." + selectedFilter;
+            filterID = "#" + selectedFilter;
+
+            var f = availableFiltersObj;
+
+            // Callback function before any filter actions begin
+            $.isFunction(settings.start) && settings.start.call(this);
+
+            // Resets all iso-els before filtering the selected ones
+            settings.isosBox.find(settings.isoWrapper).show();
+
+            // Handles faceted filtering
+            for (var item in f) {
+                if (item === selectedFilter && f[item] === "isInactive") {
+                    // Adds the selected class to the array of filtered elements
+                    filteredEls.push(isoClass);
+
+                    // Filters the selected elements
+                    settings.isosBox.find(filteredEls.toString()).hide();
+                    rowStart();
+
+                    // Sets the filter state
+                    f[item] = "isActive";
+
+                    // Sets the active filter styles
+                    settings.filtersBox.find(filterID).addClass("active");
+                    break;
+                } else if (item === selectedFilter && f[item] === "isActive") {
+                    // Finds the selected active class in the array of filtered elements
+                    for (var i = 0, l = filteredEls.length; i < l; i++) {
+                        if (filteredEls[i] === isoClass) {
+                            // Removes the class from the array
+                            filteredEls.splice(i, 1);
+                            break;
+                        }
+                    }
+
+                    // Filters the selected elements if the array is not empty
+                    if (filteredEls.length) {
+                        settings.isosBox.find(filteredEls.toString()).hide();
+                    }
+                    rowStart();
+
+                    // Sets the filter state
+                    f[item] = "isInactive";
+
+                    // Sets inactive filter styles
+                    settings.filtersBox.find(filterID).removeClass("active");
+                    break;
+                }
+            }
+
+            // Callback function after all filter actions are complete
+            $.isFunction(settings.complete) && settings.complete.call(this);
+        };
+
+        // Evaluates what scaffolding system, if any, was called and takes the appropriate action
+        if (settings.bootstrap === true || settings.columns === true) {
+            if (settings.bootstrap === true) {
+                if (version === "3") {
+                    // Automatic generation of Bootstrap 3 scaffolding
+                    settings.isosBox.find(settings.isoWrapper).addClass("col-" + settings.breakpoint + "-" + settings.colSpan);
+                } else if (version === "2") {
+                    // Automatic generation of Bootstrap 2 scaffolding
+                    settings.isosBox.find(settings.isoWrapper).addClass("span" + settings.colSpan);
+                    // Sets the class to remove left margin from elements that start a row
+                    rowStart();
+                } else {
+                    // Alerts the outputted Bootstrap version number if a conflict is found
+                    // Only 2 or 3 is supported. The ouputted version is the major release parsed from user input
+                    alert("Isolate supports Bootstrap versions 2 and 3. You entered version " + version + ".\n\n Please use a supported version.");
+                }
+            } else {
+                // Automatic generation of built-in scaffolding classes
+                settings.isosBox.find(settings.isoWrapper).addClass("iso-col-" + settings.colSpan);
+            }
         }
 
-        activeFilter(active);
-        els.toggle(0, rowStart);
+        // Callback function after plugin is setup
+        $.isFunction(settings.setup) && settings.setup.call(this);
 
-        oldIso = currentIso;
-
-        $.isFunction(settings.complete) && settings.complete.call(this);
-    };
-
-    var filter = function () {
-        currentIso = $(this).attr("id");
-        iso = "." + currentIso;
-        active = "#" + currentIso;
-        el = settings.isosBox.find(iso);
-
-        if (currentIso != oldIso && oldIso != "") {
-            settings.isosBox.find("." + oldIso).show();
-        }
-
-        activeFilter(active);
-        el.toggle(0, rowStart);
-
-        oldIso = currentIso;
-
-        $.isFunction(settings.complete) && settings.complete.call(this);
-    };
-
-    if (settings.bootstrap == true || settings.columns == true) {
-        if (settings.bootstrap == true) {
-            if (version == "3") {
-                settings.isosBox.find(settings.isoWrapper).addClass("col-" + settings.breakpoint + "-" + settings.colSpan);
-            } else if (version == "2") {
-                settings.isosBox.find(settings.isoWrapper).addClass("span" + settings.colSpan);
-                rowStart();
-            } else { alert("Isolate supports Bootstrap versions 2 and 3. You entered version " + version + ".\n\n Please use a supported version."); }
+        // Namespaced click events for isolate and filter settings
+        if (settings.filter === true) {
+            settings.filtersBox.on("click.isolate", ".filter", filter);
         } else {
-            settings.isosBox.find(settings.isoWrapper).addClass("iso-col-" + settings.colSpan);
+            settings.filtersBox.on("click.isolate", ".filter", isolate);
         }
-    }
 
-    $.isFunction(settings.setup) && settings.setup.call(this);
+        // Global method to create an object of available filters
+        function makeFiltersObject() {
+            var filtersObject = {};
 
-    if (settings.filter == true) {
-        settings.filtersBox.on("click.isolate", ".filter", filter);
-    } else {
-        settings.filtersBox.on("click.isolate", ".filter", isolate);
-    }
+            settings.filtersBox.find(".filter").each(function (index) {
+                availableFilter = $(this).attr("id");
 
-    function activeFilter(selectedFilter) {
-        if (!settings.filtersBox.find(".filter").hasClass("active")) {
-            settings.filtersBox.find(selectedFilter).addClass("active");
-        } else if (!settings.filtersBox.find(selectedFilter).hasClass("active")) {
-            settings.filtersBox.find(".filter").removeClass("active");
-            settings.filtersBox.find(selectedFilter).addClass("active");
-        } else {
-            settings.filtersBox.find(".filter").removeClass("active");
+                filtersObject[availableFilter] = "isInactive";
+            });
+
+            return filtersObject;
         }
-    }
 
-    function rowStart() {
-        if (settings.bootstrap == true && version == "2") {
-            settings.isosBox.find(settings.isoWrapper).removeClass("bs-2-row-start");
-            settings.isosBox.find(settings.isoWrapper).filter(function () {
-                return $(this).css("display") != "none";
-            }).each(function (index) {
-                if (settings.colSpan > 6) {
-                    $(this).addClass("bs-2-row-start");
-                } else if (settings.colSpan == 5 || settings.colSpan == 6) {
-                    if (index % 2 == 0) {
+        // Global function for Bootstrap 2 scaffolding
+        // Applies CSS class to remove the left margin from elements that start a row
+        function rowStart() {
+            if (settings.bootstrap === true && version === "2") {
+                settings.isosBox.find(settings.isoWrapper).removeClass("bs-2-row-start");
+                settings.isosBox.find(settings.isoWrapper).filter(function () {
+                    return $(this).css("display") != "none";
+                }).each(function (index) {
+                    if (settings.colSpan > 6) {
+                        $(this).addClass("bs-2-row-start");
+                    } else if (settings.colSpan === 5 || settings.colSpan === 6) {
+                        if (index % 2 === 0) {
+                            $(this).addClass("bs-2-row-start");
+                        }
+                    } else if ((index + 1) % (12 / settings.colSpan + 1) === 0) {
                         $(this).addClass("bs-2-row-start");
                     }
-                } else if ((index + 1) % (12 / settings.colSpan + 1) == 0) {
-                    $(this).addClass("bs-2-row-start");
-                }
-            });
+                });
+            }
         }
-    }
 
-    var iso = "",
-        el = "",
-        els = "",
-        active = "",
-        currentIso = "",
-        oldIso = "";
+        var availableFilter = "",
+            selectedFilter = "",
+            filterID = "",
+            isoClass = "",
+            isolatedEls = [],
+            filteredEls = [];
+    });
 };
