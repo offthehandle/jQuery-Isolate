@@ -2,13 +2,13 @@
 /*
  * Isolate Plugin for jQuery JavaScript Library
  * 
- * Copyright (c) 2014 Adam J De Lucia
+ * Copyright (c) 2014-2015 Adam J De Lucia
  * Licensed under the MIT License.
  * http://opensource.org/licenses/MIT
  * 
  * Author: Adam J De Lucia
  * Version: 1.2.1
- * Date: December 17, 2014
+ * Date: April 22, 2015
  * 
  */
 
