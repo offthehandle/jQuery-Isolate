@@ -6,8 +6,8 @@
  * http://opensource.org/licenses/MIT
  * 
  * Author: Adam J De Lucia
- * Scaffolding Version: 1.0.1 (Isolate 1.2.1)
- * Date: December 17, 2014
+ * Scaffolding Version: 1.1.0 (Isolate 1.2.1)
+ * Date: April 22, 2014
  * 
  */
 #iso-filters .filters-header,
@@ -51,44 +51,70 @@
 #iso-els [class*="iso-col-"] {
   position: relative;
   min-height: 1px;
+  width: 100%;
   float: left;
+  display: block;
   padding-left: 15px;
   padding-right: 15px;
 }
-#iso-els .iso-col-1 {
-  width: 8.33333333%;
+@media (min-width: 992px) {
+  #iso-els .iso-col-1 {
+    width: 8.33333333%;
+  }
 }
-#iso-els .iso-col-2 {
-  width: 16.66666667%;
+@media (min-width: 992px) {
+  #iso-els .iso-col-2 {
+    width: 16.66666667%;
+  }
 }
-#iso-els .iso-col-3 {
-  width: 25%;
+@media (min-width: 992px) {
+  #iso-els .iso-col-3 {
+    width: 25%;
+  }
 }
-#iso-els .iso-col-4 {
-  width: 33.33333333%;
+@media (min-width: 992px) {
+  #iso-els .iso-col-4 {
+    width: 33.33333333%;
+  }
 }
-#iso-els .iso-col-5 {
-  width: 41.66666667%;
+@media (min-width: 992px) {
+  #iso-els .iso-col-5 {
+    width: 41.66666667%;
+  }
 }
-#iso-els .iso-col-6 {
-  width: 50%;
+@media (min-width: 992px) {
+  #iso-els .iso-col-6 {
+    width: 50%;
+  }
 }
-#iso-els .iso-col-7 {
-  width: 58.33333333%;
+@media (min-width: 992px) {
+  #iso-els .iso-col-7 {
+    width: 58.33333333%;
+  }
 }
-#iso-els .iso-col-8 {
-  width: 66.66666667%;
+@media (min-width: 992px) {
+  #iso-els .iso-col-8 {
+    width: 66.66666667%;
+  }
 }
-#iso-els .iso-col-9 {
-  width: 75%;
+@media (min-width: 992px) {
+  #iso-els .iso-col-9 {
+    width: 75%;
+  }
 }
-#iso-els .iso-col-10 {
-  width: 83.33333333%;
+@media (min-width: 992px) {
+  #iso-els .iso-col-10 {
+    width: 83.33333333%;
+  }
 }
-#iso-els .iso-col-11 {
-  width: 91.66666667%;
+@media (min-width: 992px) {
+  #iso-els .iso-col-11 {
+    width: 91.66666667%;
+  }
 }
-#iso-els .iso-col-12 {
-  width: 100%;
+@media (min-width: 992px) {
+  #iso-els .iso-col-12 {
+    width: 100%;
+  }
 }
 /*# sourceMappingURL=jquery.isolate.css.map */

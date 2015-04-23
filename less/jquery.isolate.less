@@ -7,14 +7,15 @@
  * http://opensource.org/licenses/MIT
  * 
  * Author: Adam J De Lucia
- * Scaffolding Version: 1.0.1 (Isolate 1.2.1)
- * Date: December 17, 2014
+ * Scaffolding Version: 1.1.0 (Isolate 1.2.1)
+ * Date: April 22, 2014
  * 
  */
 
 @isosID: ~"#iso-els";
 @filtersID: ~"#iso-filters";
 @filtersID2: ~"#myFilters";
+@iso-col-breakpoint: 992px;
 @bgColor: #fff;
 @bgHoverColor: rgb(48,120,144);
 @activeColor: lighten(rgb(144,216,240), 20%);
@@ -36,9 +37,9 @@
     background-color: @bgColor;
     border: solid 1px @bgHoverColor;
     -webkit-border-radius: 6px;
-       -moz-border-radius: 6px;
-        -ms-border-radius: 6px;
-         -o-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
     border-radius: 6px;
     display: block;
     margin-bottom: 15px;
@@ -62,55 +63,81 @@
 @{isosID} [class*="iso-col-"] {
     position: relative;
     min-height: 1px;
+    width: 100%;
     float: left;
+    display: block;
     padding-left: 15px;
     padding-right: 15px;
 }
 
 @{isosID} .iso-col-1 {
-    width: 8.33333333%;
+    @media (min-width: @iso-col-breakpoint) {
+        width: 8.33333333%;
+    }
 }
 
 @{isosID} .iso-col-2 {
-    width: 16.66666667%;
+    @media (min-width: @iso-col-breakpoint) {
+        width: 16.66666667%;
+    }
 }
 
 @{isosID} .iso-col-3 {
-    width: 25%;
+    @media (min-width: @iso-col-breakpoint) {
+        width: 25%;
+    }
 }
 
 @{isosID} .iso-col-4 {
-    width: 33.33333333%;
+    @media (min-width: @iso-col-breakpoint) {
+        width: 33.33333333%;
+    }
 }
 
 @{isosID} .iso-col-5 {
-    width: 41.66666667%;
+    @media (min-width: @iso-col-breakpoint) {
+        width: 41.66666667%;
+    }
 }
 
 @{isosID} .iso-col-6 {
-    width: 50%;
+    @media (min-width: @iso-col-breakpoint) {
+        width: 50%;
+    }
 }
 
 @{isosID} .iso-col-7 {
-    width: 58.33333333%;
+    @media (min-width: @iso-col-breakpoint) {
+        width: 58.33333333%;
+    }
 }
 
 @{isosID} .iso-col-8 {
-    width: 66.66666667%;
+    @media (min-width: @iso-col-breakpoint) {
+        width: 66.66666667%;
+    }
 }
 
 @{isosID} .iso-col-9 {
-    width: 75%;
+    @media (min-width: @iso-col-breakpoint) {
+        width: 75%;
+    }
 }
 
 @{isosID} .iso-col-10 {
-    width: 83.33333333%;
+    @media (min-width: @iso-col-breakpoint) {
+        width: 83.33333333%;
+    }
 }
 
 @{isosID} .iso-col-11 {
-    width: 91.66666667%;
+    @media (min-width: @iso-col-breakpoint) {
+        width: 91.66666667%;
+    }
 }
 
 @{isosID} .iso-col-12 {
-    width: 100%;
+    @media (min-width: @iso-col-breakpoint) {
+        width: 100%;
+    }
 }
