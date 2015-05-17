@@ -1,4 +1,4 @@
-jQuery-Isolate
+jQuery Isolate
 ==============
 
-Isolate or filter groups of elements with the click of a button. Faceted filtering is supported. Built-in scaffolding with easily configurable, dynamically generated Bootstrap 2 and 3 grid classes keep your filtered elements tightly grouped. Callbacks on setup, start and complete.
+Isolate is a dynamic plugin with options to perform faceted filtering or isolation of elements with the click of a button. Highly configurable, Isolate supports Bootstrap scaffolding with ease. Built-in CSS scaffolding support with LESS source is also provided for non-Bootstraped projects, but not required.
