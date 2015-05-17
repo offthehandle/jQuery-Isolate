@@ -7,8 +7,8 @@
  * http://opensource.org/licenses/MIT
  * 
  * Author: Adam J De Lucia
- * Version: 1.2.2
- * Date: April 22, 2015
+ * Version: 1.2.3
+ * Date: May 17, 2015
  * 
  */
 
