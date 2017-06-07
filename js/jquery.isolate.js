@@ -7,8 +7,8 @@
  * http://opensource.org/licenses/MIT
  * 
  * Author: Adam J De Lucia
- * Version: 1.3.0
- * Date: June 5, 2017
+ * Version: 1.4.0
+ * Date: June 6, 2017
  * 
  */
 
@@ -25,26 +25,24 @@
                 bootstrap: true,
                 version: 3,
                 breakpoint: 'md',
-                columns: 3,
+                bsSpan: 3,
+                columns: 4,
                 bootstrap2row: 'bootstrap-2-row',
                 setup: null,
                 start: null,
                 complete: null,
             }, options);
 
-            var availableFilter = '',
-                selectedFilter = '',
-                filterID = '',
-                isoClass = '',
+            var instanceID = '#' + $(this).attr('id'),
+                filtersMap = getFiltersMap(),
+                filterMember = null,
+                selectedFilter = null,
+                filterID = null,
+                isoClass = null,
                 isolatedEls = [],
-                filteredEls = [];
-
-            // Parses version user input to a major release
-            var str = settings.version.toString();
-            var version = str.substring(0, 1);
-
-            // Instantiates an object to track the state of available filters
-            var availableFiltersObj = makeFiltersObject();
+                filteredEls = [],
+                version = settings.version.toString(),
+                majorVersion = Number(version.substring(0, 1));
 
             // Isolate method
             var isolate = function () {
@@ -53,38 +51,37 @@
                 isoClass = '.' + selectedFilter;
                 filterID = '#' + selectedFilter;
 
-                var f = availableFiltersObj;
+                var map = filtersMap;
 
                 // Callback function before any filter actions begin
-                $.isFunction(settings.start) && settings.start.call(this);
+                $.isFunction(settings.start) && settings.start.call(this, map, selectedFilter);
 
-                // TODO : enrich event with data
-                $(this).trigger('isolate.filter.start');
+                $(instanceID).trigger('isolate.filter.start', [this, map, selectedFilter]);
 
                 // Resets all iso-els before isolating the selected ones
                 settings.filteredList.find(settings.iso).show();
 
                 // Handles faceted isolation
-                for (var item in f) {
+                for (var _filter in map) {
 
-                    if (item === selectedFilter && f[item] === 'isInactive') {
+                    if (_filter === selectedFilter && map[_filter] === 'isInactive') {
 
                         // Adds the selected class to the array of isolated elements
                         isolatedEls.push(isoClass);
 
                         // Isolates the selected elements
                         settings.filteredList.find($(settings.iso).not(isolatedEls.toString())).hide();
-                        rowStart();
+                        setClassFixBS2();
 
                         // Sets the filter state
-                        f[item] = 'isActive';
+                        map[_filter] = 'isActive';
 
                         // Sets the active filter styles
                         settings.filters.find(filterID).addClass('active');
 
                         break;
 
-                    } else if (item === selectedFilter && f[item] === 'isActive') {
+                    } else if (_filter === selectedFilter && map[_filter] === 'isActive') {
 
                         // Finds the selected active class in the array of isolated elements
                         for (var i = 0, l = isolatedEls.length; i < l; i++) {
@@ -104,10 +101,10 @@
                             settings.filteredList.find($(settings.iso).not(isolatedEls.toString())).hide();
                         }
 
-                        rowStart();
+                        setClassFixBS2();
 
                         // Sets the filter state
-                        f[item] = 'isInactive';
+                        map[_filter] = 'isInactive';
 
                         // Sets inactive filter styles
                         settings.filters.find(filterID).removeClass('active');
@@ -117,10 +114,9 @@
                 }
 
                 // Callback function after all filter actions are complete
-                $.isFunction(settings.complete) && settings.complete.call(this);
+                $.isFunction(settings.complete) && settings.complete.call(this, map, selectedFilter, isolatedEls);
 
-                // TODO : enrich event with data
-                $(this).trigger('isolate.filter.complete');
+                $(instanceID).trigger('isolate.filter.complete', [this, map, selectedFilter, isolatedEls]);
             };
 
             // Filter method
@@ -130,38 +126,38 @@
                 isoClass = '.' + selectedFilter;
                 filterID = '#' + selectedFilter;
 
-                var f = availableFiltersObj;
+                var map = filtersMap;
 
                 // Callback function before any filter actions begin
-                $.isFunction(settings.start) && settings.start.call(this);
+                // Callback function before any filter actions begin
+                $.isFunction(settings.start) && settings.start.call(this, map, selectedFilter);
 
-                // TODO : enrich event with data
-                $(this).trigger('isolate.filter.start');
+                $(instanceID).trigger('isolate.filter.start', [this, map, selectedFilter]);
 
                 // Resets all iso-els before filtering the selected ones
                 settings.filteredList.find(settings.iso).show();
 
                 // Handles faceted filtering
-                for (var item in f) {
+                for (var _filter in map) {
 
-                    if (item === selectedFilter && f[item] === 'isInactive') {
+                    if (_filter === selectedFilter && map[_filter] === 'isInactive') {
 
                         // Adds the selected class to the array of filtered elements
                         filteredEls.push(isoClass);
 
                         // Filters the selected elements
                         settings.filteredList.find(filteredEls.toString()).hide();
-                        rowStart();
+                        setClassFixBS2();
 
                         // Sets the filter state
-                        f[item] = 'isActive';
+                        map[_filter] = 'isActive';
 
                         // Sets the active filter styles
                         settings.filters.find(filterID).addClass('active');
 
                         break;
 
-                    } else if (item === selectedFilter && f[item] === 'isActive') {
+                    } else if (_filter === selectedFilter && map[_filter] === 'isActive') {
 
                         // Finds the selected active class in the array of filtered elements
                         for (var i = 0, l = filteredEls.length; i < l; i++) {
@@ -181,10 +177,10 @@
                             settings.filteredList.find(filteredEls.toString()).hide();
                         }
 
-                        rowStart();
+                        setClassFixBS2();
 
                         // Sets the filter state
-                        f[item] = 'isInactive';
+                        map[_filter] = 'isInactive';
 
                         // Sets inactive filter styles
                         settings.filters.find(filterID).removeClass('active');
@@ -194,10 +190,9 @@
                 }
 
                 // Callback function after all filter actions are complete
-                $.isFunction(settings.complete) && settings.complete.call(this);
+                $.isFunction(settings.complete) && settings.complete.call(this, map, selectedFilter, filteredEls);
 
-                // TODO : enrich event with data
-                $(this).trigger('isolate.filter.complete');
+                $(instanceID).trigger('isolate.filter.complete', [this, map, selectedFilter, filteredEls]);
             };
 
             // Evaluates what scaffolding system, if any, was called and takes the appropriate action
@@ -205,37 +200,39 @@
 
                 if (settings.bootstrap === true) {
 
-                    if (version === '3') {
+                    if (majorVersion === 3) {
 
                         // Automatic generation of Bootstrap 3 scaffolding
-                        settings.filteredList.find(settings.iso).addClass('col-' + settings.breakpoint + '-' + settings.columns);
+                        settings.filteredList.find(settings.iso).addClass('col-' + settings.breakpoint + '-' + settings.bsSpan);
 
-                    } else if (version === '2') {
+                    } else if (majorVersion === 2) {
 
                         // Automatic generation of Bootstrap 2 scaffolding
-                        settings.filteredList.find(settings.iso).addClass('span' + settings.columns);
+                        settings.filteredList.find(settings.iso).addClass('span' + settings.bsSpan);
 
                         // Sets the class to remove left margin from elements that start a row
-                        rowStart();
+                        setClassFixBS2();
 
                     } else {
 
                         // Alerts the outputted Bootstrap version number if a conflict is found
                         // Only 2 or 3 is supported. The ouputted version is the major release parsed from user input
-                        alert('Isolate supports Bootstrap versions 2 and 3. You entered version ' + version + '.\n\n Please use a supported version.');
+                        alert('Isolate supports Bootstrap versions 2 and 3. You entered version ' + majorVersion + '.\n\n Please use a supported version.');
                     }
+
                 } else {
 
                     // Automatic generation of built-in scaffolding classes
-                    settings.filteredList.find(settings.iso).addClass('iso-col-' + settings.columns);
+                    settings.filteredList.find(settings.iso).addClass('iso-' + settings.breakpoint + settings.columns);
                 }
             }
 
             // Callback function after plugin is setup
-            $.isFunction(settings.setup) && settings.setup.call(this);
+            $.isFunction(settings.setup) && settings.setup.call(this, filtersMap);
 
-            // TODO : Trigger event from jQuery object to which isolate is assigned
-            $(document).trigger('isolate.setup');
+            setTimeout(function () {
+                $(instanceID).trigger('isolate.setup', [filtersMap]);
+            }, 200);
 
             // Namespaced click events for isolate and filter settings
             if (settings.isolate === true) {
@@ -248,46 +245,46 @@
             }
 
             // Global method to create an object of available filters
-            function makeFiltersObject() {
+            function getFiltersMap() {
 
-                var filtersObject = {};
+                var activeFiltersMap = {};
 
                 settings.filters.find(settings.filterClass).each(function (index) {
 
-                    availableFilter = $(this).attr('id');
+                    filterMember = $(this).attr('id');
 
-                    filtersObject[availableFilter] = 'isInactive';
+                    activeFiltersMap[filterMember] = 'isInactive';
                 });
 
-                return filtersObject;
+                return activeFiltersMap;
             }
 
             // Global function for Bootstrap 2 scaffolding
             // Applies CSS class to remove the left margin from elements that start a row
-            function rowStart() {
+            function setClassFixBS2() {
 
-                if (settings.bootstrap === true && version === '2') {
+                if (settings.bootstrap === true && majorVersion === 2) {
 
                     settings.filteredList.find(settings.iso).removeClass(settings.bootstrap2row);
 
                     settings.filteredList.find(settings.iso).filter(function () {
 
-                        return $(this).css('display') != 'none';
+                        return $(this).css('display') !== 'none';
 
                     }).each(function (index) {
 
-                        if (settings.columns > 6) {
+                        if (settings.bsSpan > 6) {
 
                             $(this).addClass(settings.bootstrap2row);
 
-                        } else if (settings.columns === 5 || settings.columns === 6) {
+                        } else if (settings.bsSpan === 5 || settings.bsSpan === 6) {
 
                             if (index % 2 === 0) {
 
                                 $(this).addClass(settings.bootstrap2row);
                             }
 
-                        } else if ((index + 1) % (12 / settings.columns + 1) === 0) {
+                        } else if ((index + 1) % (12 / settings.bsSpan + 1) === 0) {
 
                             $(this).addClass(settings.bootstrap2row);
                         }
