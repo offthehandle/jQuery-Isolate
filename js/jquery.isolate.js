@@ -26,8 +26,8 @@
                 version: 3,
                 breakpoint: 'md',
                 bsSpan: 3,
+                bs2row: 'bootstrap-2-row',
                 columns: 4,
-                bootstrap2row: 'bootstrap-2-row',
                 setup: null,
                 start: null,
                 complete: null,
@@ -265,7 +265,7 @@
 
                 if (settings.bootstrap === true && majorVersion === 2) {
 
-                    settings.filteredList.find(settings.iso).removeClass(settings.bootstrap2row);
+                    settings.filteredList.find(settings.iso).removeClass(settings.bs2row);
 
                     settings.filteredList.find(settings.iso).filter(function () {
 
@@ -275,18 +275,18 @@
 
                         if (settings.bsSpan > 6) {
 
-                            $(this).addClass(settings.bootstrap2row);
+                            $(this).addClass(settings.bs2row);
 
                         } else if (settings.bsSpan === 5 || settings.bsSpan === 6) {
 
                             if (index % 2 === 0) {
 
-                                $(this).addClass(settings.bootstrap2row);
+                                $(this).addClass(settings.bs2row);
                             }
 
                         } else if ((index + 1) % (12 / settings.bsSpan + 1) === 0) {
 
-                            $(this).addClass(settings.bootstrap2row);
+                            $(this).addClass(settings.bs2row);
                         }
                     });
                 }
