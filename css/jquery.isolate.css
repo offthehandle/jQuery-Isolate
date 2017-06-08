@@ -1,13 +1,13 @@
 ﻿/*
- * Scaffolding for jQuery Isolate Plugin
+ * Grid for jQuery Isolate Plugin
  * 
- * Copyright (c) 2014-2015 Adam J De Lucia
+ * Copyright (c) 2014-2017 Adam J De Lucia
  * Licensed under the MIT License.
  * http://opensource.org/licenses/MIT
  * 
  * Author: Adam J De Lucia
- * Scaffolding Version: 1.1.0 (Isolate 1.2.3)
- * Date: May 17, 2015
+ * Scaffolding Version: 1.2.0 (Isolate 1.4.0)
+ * Date: June 7, 2017
  * 
  */
 #iso-filters .filters-header,
@@ -45,10 +45,10 @@
   color: #eaf8fc;
   background-color: #003547;
 }
-#iso-els .bs-2-row-start {
+#isos .bootstrap-2-row {
   margin-left: 0;
 }
-#iso-els [class*="iso-col-"] {
+#isos [class*="iso-"] {
   position: relative;
   min-height: 1px;
   width: 100%;
@@ -58,62 +58,62 @@
   padding-right: 15px;
 }
 @media (min-width: 992px) {
-  #iso-els .iso-col-1 {
+  #isos .iso-1 {
     width: 8.33333333%;
   }
 }
 @media (min-width: 992px) {
-  #iso-els .iso-col-2 {
+  #isos .iso-2 {
     width: 16.66666667%;
   }
 }
 @media (min-width: 992px) {
-  #iso-els .iso-col-3 {
+  #isos .iso-3 {
     width: 25%;
   }
 }
 @media (min-width: 992px) {
-  #iso-els .iso-col-4 {
+  #isos .iso-4 {
     width: 33.33333333%;
   }
 }
 @media (min-width: 992px) {
-  #iso-els .iso-col-5 {
+  #isos .iso-5 {
     width: 41.66666667%;
   }
 }
 @media (min-width: 992px) {
-  #iso-els .iso-col-6 {
+  #isos .iso-6 {
     width: 50%;
   }
 }
 @media (min-width: 992px) {
-  #iso-els .iso-col-7 {
+  #isos .iso-7 {
     width: 58.33333333%;
   }
 }
 @media (min-width: 992px) {
-  #iso-els .iso-col-8 {
+  #isos .iso-8 {
     width: 66.66666667%;
   }
 }
 @media (min-width: 992px) {
-  #iso-els .iso-col-9 {
+  #isos .iso-9 {
     width: 75%;
   }
 }
 @media (min-width: 992px) {
-  #iso-els .iso-col-10 {
+  #isos .iso-10 {
     width: 83.33333333%;
   }
 }
 @media (min-width: 992px) {
-  #iso-els .iso-col-11 {
+  #isos .iso-11 {
     width: 91.66666667%;
   }
 }
 @media (min-width: 992px) {
-  #iso-els .iso-col-12 {
+  #isos .iso-12 {
     width: 100%;
   }
 }
