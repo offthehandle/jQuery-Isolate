@@ -7,8 +7,8 @@
  * http://opensource.org/licenses/MIT
  * 
  * Author: Adam J De Lucia
- * Version: 1.4.0
- * Date: June 6, 2017
+ * Version: 1.5.0
+ * Date: June 7, 2017
  * 
  */
 
@@ -223,7 +223,7 @@
                 } else {
 
                     // Automatic generation of built-in scaffolding classes
-                    settings.filteredList.find(settings.iso).addClass('iso-' + settings.breakpoint + settings.columns);
+                    settings.filteredList.find(settings.iso).addClass('iso-' + settings.breakpoint + '-' + settings.columns);
                 }
             }
 
