@@ -129,7 +129,6 @@
                 var map = filtersMap;
 
                 // Callback function before any filter actions begin
-                // Callback function before any filter actions begin
                 $.isFunction(settings.start) && settings.start.call(this, map, selectedFilter);
 
                 $(instanceID).trigger('isolate.filter.start', [this, map, selectedFilter]);
