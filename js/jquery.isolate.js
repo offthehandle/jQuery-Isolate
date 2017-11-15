@@ -7,8 +7,8 @@
  * http://opensource.org/licenses/MIT
  * 
  * Author: Adam J De Lucia
- * Version: 1.5.0
- * Date: June 7, 2017
+ * Version: 1.6.0
+ * Date: November 14, 2017
  * 
  */
 
@@ -199,10 +199,40 @@
 
                 if (settings.bootstrap === true) {
 
-                    if (majorVersion === 3) {
+                    if (majorVersion === 4) {
 
-                        // Automatic generation of Bootstrap 3 scaffolding
-                        settings.filteredList.find(settings.iso).addClass('col-' + settings.breakpoint + '-' + settings.bsSpan);
+                        if (['xs', 'sm', 'md', 'lg', 'xl'].indexOf(settings.breakpoint) > -1 || settings.breakpoint === null || $.trim(settings.breakpoint) === '') {
+
+                            // Automatic generation of Bootstrap 4 scaffolding
+                            if (['sm', 'md', 'lg', 'xl'].indexOf(settings.breakpoint) > -1) {
+
+                                settings.filteredList.find(settings.iso).addClass('col-' + settings.breakpoint + '-' + settings.bsSpan);
+
+                            } else {
+
+                                settings.filteredList.find(settings.iso).addClass('col-' + settings.bsSpan);
+                            }
+
+                        } else {
+
+                            // Alerts the outputted Bootstrap breakpoint if a conflict is found
+                            // All breakpoints are supported.
+                            alert('Isolate supports all Bootstrap 4 breakpoints, including xl, lg, md, sm and, for extra small, xs, null or an empty string. You entered ' + settings.breakpoint + '.\n\n Please use a supported breakpoint.');
+                        }
+
+                    } else if (majorVersion === 3) {
+
+                        if (['xs', 'sm', 'md', 'lg'].indexOf(settings.breakpoint) > -1) {
+
+                            // Automatic generation of Bootstrap 3 scaffolding
+                            settings.filteredList.find(settings.iso).addClass('col-' + settings.breakpoint + '-' + settings.bsSpan);
+
+                        } else {
+
+                            // Alerts the outputted Bootstrap breakpoint if a conflict is found
+                            // All breakpoints are supported.
+                            alert('Isolate supports all Bootstrap 3 breakpoints, including lg, md, sm and xs. You entered ' + settings.breakpoint + '.\n\n Please use a supported breakpoint.');
+                        }
 
                     } else if (majorVersion === 2) {
 
@@ -215,8 +245,8 @@
                     } else {
 
                         // Alerts the outputted Bootstrap version number if a conflict is found
-                        // Only 2 or 3 is supported. The ouputted version is the major release parsed from user input
-                        alert('Isolate supports Bootstrap versions 2 and 3. You entered version ' + majorVersion + '.\n\n Please use a supported version.');
+                        // 2 through 4 is supported. The ouputted version is the major release parsed from user input
+                        alert('Isolate supports Bootstrap versions 2 through 4. You entered version ' + majorVersion + '.\n\n Please use a supported version.');
                     }
 
                 } else {
@@ -230,7 +260,9 @@
             $.isFunction(settings.setup) && settings.setup.call(this, filtersMap);
 
             setTimeout(function () {
+
                 $(instanceID).trigger('isolate.setup', [filtersMap]);
+
             }, 200);
 
             // Namespaced click events for isolate and filter settings
