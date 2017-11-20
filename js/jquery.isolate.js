@@ -7,8 +7,8 @@
  * http://opensource.org/licenses/MIT
  * 
  * Author: Adam J De Lucia
- * Version: 1.6.0
- * Date: November 14, 2017
+ * Version: 1.7.0
+ * Date: November 19, 2017
  * 
  */
 
@@ -26,7 +26,6 @@
                 version: 3,
                 breakpoint: 'md',
                 bsSpan: 3,
-                bs2row: 'bootstrap-2-row',
                 columns: 4,
                 setup: null,
                 start: null,
@@ -71,7 +70,6 @@
 
                         // Isolates the selected elements
                         settings.filteredList.find($(settings.iso).not(isolatedEls.toString())).hide();
-                        setClassFixBS2();
 
                         // Sets the filter state
                         map[_filter] = 'isActive';
@@ -100,8 +98,6 @@
 
                             settings.filteredList.find($(settings.iso).not(isolatedEls.toString())).hide();
                         }
-
-                        setClassFixBS2();
 
                         // Sets the filter state
                         map[_filter] = 'isInactive';
@@ -146,7 +142,6 @@
 
                         // Filters the selected elements
                         settings.filteredList.find(filteredEls.toString()).hide();
-                        setClassFixBS2();
 
                         // Sets the filter state
                         map[_filter] = 'isActive';
@@ -176,8 +171,6 @@
                             settings.filteredList.find(filteredEls.toString()).hide();
                         }
 
-                        setClassFixBS2();
-
                         // Sets the filter state
                         map[_filter] = 'isInactive';
 
@@ -197,62 +190,82 @@
             // Evaluates what scaffolding system, if any, was called and takes the appropriate action
             if (settings.bootstrap === true || settings.isoGrid === true) {
 
+                // Constructs the grid class based on user input
+                var gridClass = '';
+
                 if (settings.bootstrap === true) {
 
-                    if (majorVersion === 4) {
-
-                        if (['xs', 'sm', 'md', 'lg', 'xl'].indexOf(settings.breakpoint) > -1 || settings.breakpoint === null || $.trim(settings.breakpoint) === '') {
-
-                            // Automatic generation of Bootstrap 4 scaffolding
-                            if (['sm', 'md', 'lg', 'xl'].indexOf(settings.breakpoint) > -1) {
-
-                                settings.filteredList.find(settings.iso).addClass('col-' + settings.breakpoint + '-' + settings.bsSpan);
-
-                            } else {
-
-                                settings.filteredList.find(settings.iso).addClass('col-' + settings.bsSpan);
-                            }
-
-                        } else {
-
-                            // Alerts the outputted Bootstrap breakpoint if a conflict is found
-                            // All breakpoints are supported.
-                            alert('Isolate supports all Bootstrap 4 breakpoints, including xl, lg, md, sm and, for extra small, xs, null or an empty string. You entered ' + settings.breakpoint + '.\n\n Please use a supported breakpoint.');
-                        }
-
-                    } else if (majorVersion === 3) {
-
-                        if (['xs', 'sm', 'md', 'lg'].indexOf(settings.breakpoint) > -1) {
-
-                            // Automatic generation of Bootstrap 3 scaffolding
-                            settings.filteredList.find(settings.iso).addClass('col-' + settings.breakpoint + '-' + settings.bsSpan);
-
-                        } else {
-
-                            // Alerts the outputted Bootstrap breakpoint if a conflict is found
-                            // All breakpoints are supported.
-                            alert('Isolate supports all Bootstrap 3 breakpoints, including lg, md, sm and xs. You entered ' + settings.breakpoint + '.\n\n Please use a supported breakpoint.');
-                        }
-
-                    } else if (majorVersion === 2) {
-
-                        // Automatic generation of Bootstrap 2 scaffolding
-                        settings.filteredList.find(settings.iso).addClass('span' + settings.bsSpan);
-
-                        // Sets the class to remove left margin from elements that start a row
-                        setClassFixBS2();
-
-                    } else {
-
-                        // Alerts the outputted Bootstrap version number if a conflict is found
-                        // 2 through 4 is supported. The ouputted version is the major release parsed from user input
-                        alert('Isolate supports Bootstrap versions 2 through 4. You entered version ' + majorVersion + '.\n\n Please use a supported version.');
-                    }
+                    gridClass = 'col';
 
                 } else {
 
-                    // Automatic generation of built-in scaffolding classes
-                    settings.filteredList.find(settings.iso).addClass('iso-' + settings.breakpoint + '-' + settings.columns);
+                    gridClass = 'iso';
+                }
+
+                if (settings.breakpoint !== null && $.trim(settings.breakpoint) !== '') {
+
+                    gridClass += '-' + settings.breakpoint;
+                }
+
+                if (settings.bootstrap === true && settings.bsSpan !== null && $.trim(settings.bsSpan) !== '') {
+
+                    gridClass += '-' + settings.bsSpan;
+                }
+
+                if (settings.isoGrid === true && settings.columns !== null && $.trim(settings.columns) !== '') {
+
+                    gridClass += '-' + settings.columns;
+                }
+
+                // Sets the grid class
+                settings.filteredList.find(settings.iso).addClass(gridClass);
+
+
+                // Validates the grid class based on Bootstrap version
+                var classValidation = gridClass.split('-');
+
+                if (majorVersion === 3) {
+
+                    // Version 3 must have col, breakpoint and span
+                    if (classValidation.length !== 3) {
+
+                        alert('Bootstrap 3 requires both breakpoint and bsSpan options. Please check your configuration.');
+                    }
+
+                    // Validates breakpoint
+                    if (['xs', 'sm', 'md', 'lg'].indexOf(settings.breakpoint) === -1) {
+
+                        alert('Bootstrap 3 supports breakpoints xs, sm, md and lg. You entered ' + settings.breakpoint + '.\n\n Please use a supported breakpoint.');
+                    }
+
+                    // Validates span
+                    if (isNaN(settings.bsSpan)) {
+
+                        alert('Bootstrap 3 supports numbers for bsSpan. You entered ' + settings.bsSpan + '.\n\n Please enter a supported bsSpan as a number or string.');
+                    }
+                }
+
+                if (majorVersion === 4) {
+
+                    // Validates breakpoint
+                    if (settings.breakpoint !== null && $.trim(settings.breakpoint) !== '' && ['xs', 'sm', 'md', 'lg', 'xl'].indexOf(settings.breakpoint) === -1) {
+
+                        alert('Bootstrap 4 supports breakpoints xs, sm, md, lg and xl. You entered ' + settings.breakpoint + '.\n\n Please use a supported breakpoint.');
+                    }
+
+                    // Validates span
+                    if (settings.bsSpan !== null && $.trim(settings.bsSpan) !== '') {
+
+                        if (typeof settings.bsSpan !== 'number' && typeof settings.bsSpan !== 'string') {
+
+                            alert('Bootstrap 4 supports only a number or auto for bsSpan. You entered ' + settings.bsSpan + '.\n\n Please enter a supported bsSpan as a number or string. Also, null or an empty string is valid.');
+                        }
+
+                        if (typeof settings.bsSpan === 'string' && settings.bsSpan !== 'auto' && isNaN(settings.bsSpan)) {
+
+                            alert('Bootstrap 4 supports only a number or auto for bsSpan. You entered ' + settings.bsSpan + '.\n\n Please enter a supported bsSpan as a number or string. Also, null or an empty string is valid.');
+                        }
+                    }
                 }
             }
 
@@ -288,39 +301,6 @@
                 });
 
                 return activeFiltersMap;
-            }
-
-            // Global function for Bootstrap 2 scaffolding
-            // Applies CSS class to remove the left margin from elements that start a row
-            function setClassFixBS2() {
-
-                if (settings.bootstrap === true && majorVersion === 2) {
-
-                    settings.filteredList.find(settings.iso).removeClass(settings.bs2row);
-
-                    settings.filteredList.find(settings.iso).filter(function () {
-
-                        return $(this).css('display') !== 'none';
-
-                    }).each(function (index) {
-
-                        if (settings.bsSpan > 6) {
-
-                            $(this).addClass(settings.bs2row);
-
-                        } else if (settings.bsSpan === 5 || settings.bsSpan === 6) {
-
-                            if (index % 2 === 0) {
-
-                                $(this).addClass(settings.bs2row);
-                            }
-
-                        } else if ((index + 1) % (12 / settings.bsSpan + 1) === 0) {
-
-                            $(this).addClass(settings.bs2row);
-                        }
-                    });
-                }
             }
         });
     };
