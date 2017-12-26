@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "es2015",
+    "rootDir": "ts",
+    "outDir": "js",
+    "target": "es5",
+    "noImplicitAny": false,
+    "noImplicitThis": false,
+    "noImplicitReturns": true,
+    "noEmitOnError": true,
+    "allowSyntheticDefaultImports": true,
+    "removeComments": true,
+    "sourceMap": false
+  },
+  "compileOnSave": true,
+  "exclude": [
+    "node_modules"
+  ]
+}

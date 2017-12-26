@@ -6,8 +6,8 @@
  * http://opensource.org/licenses/MIT
  * 
  * Author: Adam J De Lucia
- * Version: 1.7.0
- * Date: November 19, 2017
+ * Version: 2.0.0-beta
+ * Date: December 25, 2017
  * 
  */
 #isos:not(.iso-flex) {
@@ -363,6 +363,9 @@
   position: relative;
   width: 100%;
   min-height: 1px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   padding-right: 15px;
   padding-left: 15px;
 }
@@ -377,52 +380,52 @@
   max-width: none;
 }
 #isos.iso-flex .iso-1 {
-  flex: 0 0 8.3333333333%;
-  max-width: 8.3333333333%;
+  flex: 0 0 100%;
+  max-width: 100%;
 }
 #isos.iso-flex .iso-2 {
-  flex: 0 0 16.6666666667%;
-  max-width: 16.6666666667%;
-}
-#isos.iso-flex .iso-3 {
-  flex: 0 0 25%;
-  max-width: 25%;
-}
-#isos.iso-flex .iso-4 {
-  flex: 0 0 33.3333333333%;
-  max-width: 33.3333333333%;
-}
-#isos.iso-flex .iso-5 {
-  flex: 0 0 41.6666666667%;
-  max-width: 41.6666666667%;
-}
-#isos.iso-flex .iso-6 {
   flex: 0 0 50%;
   max-width: 50%;
 }
+#isos.iso-flex .iso-3 {
+  flex: 0 0 33.3333333333%;
+  max-width: 33.3333333333%;
+}
+#isos.iso-flex .iso-4 {
+  flex: 0 0 25%;
+  max-width: 25%;
+}
+#isos.iso-flex .iso-5 {
+  flex: 0 0 20%;
+  max-width: 20%;
+}
+#isos.iso-flex .iso-6 {
+  flex: 0 0 16.6666666667%;
+  max-width: 16.6666666667%;
+}
 #isos.iso-flex .iso-7 {
-  flex: 0 0 58.3333333333%;
-  max-width: 58.3333333333%;
+  flex: 0 0 14.2857142857%;
+  max-width: 14.2857142857%;
 }
 #isos.iso-flex .iso-8 {
-  flex: 0 0 66.6666666667%;
-  max-width: 66.6666666667%;
+  flex: 0 0 12.5%;
+  max-width: 12.5%;
 }
 #isos.iso-flex .iso-9 {
-  flex: 0 0 75%;
-  max-width: 75%;
+  flex: 0 0 11.1111111111%;
+  max-width: 11.1111111111%;
 }
 #isos.iso-flex .iso-10 {
-  flex: 0 0 83.3333333333%;
-  max-width: 83.3333333333%;
+  flex: 0 0 10%;
+  max-width: 10%;
 }
 #isos.iso-flex .iso-11 {
-  flex: 0 0 91.6666666667%;
-  max-width: 91.6666666667%;
+  flex: 0 0 9.0909090909%;
+  max-width: 9.0909090909%;
 }
 #isos.iso-flex .iso-12 {
-  flex: 0 0 100%;
-  max-width: 100%;
+  flex: 0 0 8.3333333333%;
+  max-width: 8.3333333333%;
 }
 @media (min-width: 576px) {
   #isos.iso-flex .iso-sm {
@@ -436,52 +439,52 @@
     max-width: none;
   }
   #isos.iso-flex .iso-sm-1 {
-    flex: 0 0 8.3333333333%;
-    max-width: 8.3333333333%;
+    flex: 0 0 100%;
+    max-width: 100%;
   }
   #isos.iso-flex .iso-sm-2 {
-    flex: 0 0 16.6666666667%;
-    max-width: 16.6666666667%;
-  }
-  #isos.iso-flex .iso-sm-3 {
-    flex: 0 0 25%;
-    max-width: 25%;
-  }
-  #isos.iso-flex .iso-sm-4 {
-    flex: 0 0 33.3333333333%;
-    max-width: 33.3333333333%;
-  }
-  #isos.iso-flex .iso-sm-5 {
-    flex: 0 0 41.6666666667%;
-    max-width: 41.6666666667%;
-  }
-  #isos.iso-flex .iso-sm-6 {
     flex: 0 0 50%;
     max-width: 50%;
   }
+  #isos.iso-flex .iso-sm-3 {
+    flex: 0 0 33.3333333333%;
+    max-width: 33.3333333333%;
+  }
+  #isos.iso-flex .iso-sm-4 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+  #isos.iso-flex .iso-sm-5 {
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+  #isos.iso-flex .iso-sm-6 {
+    flex: 0 0 16.6666666667%;
+    max-width: 16.6666666667%;
+  }
   #isos.iso-flex .iso-sm-7 {
-    flex: 0 0 58.3333333333%;
-    max-width: 58.3333333333%;
+    flex: 0 0 14.2857142857%;
+    max-width: 14.2857142857%;
   }
   #isos.iso-flex .iso-sm-8 {
-    flex: 0 0 66.6666666667%;
-    max-width: 66.6666666667%;
+    flex: 0 0 12.5%;
+    max-width: 12.5%;
   }
   #isos.iso-flex .iso-sm-9 {
-    flex: 0 0 75%;
-    max-width: 75%;
+    flex: 0 0 11.1111111111%;
+    max-width: 11.1111111111%;
   }
   #isos.iso-flex .iso-sm-10 {
-    flex: 0 0 83.3333333333%;
-    max-width: 83.3333333333%;
+    flex: 0 0 10%;
+    max-width: 10%;
   }
   #isos.iso-flex .iso-sm-11 {
-    flex: 0 0 91.6666666667%;
-    max-width: 91.6666666667%;
+    flex: 0 0 9.0909090909%;
+    max-width: 9.0909090909%;
   }
   #isos.iso-flex .iso-sm-12 {
-    flex: 0 0 100%;
-    max-width: 100%;
+    flex: 0 0 8.3333333333%;
+    max-width: 8.3333333333%;
   }
 }
 @media (min-width: 768px) {
@@ -496,52 +499,52 @@
     max-width: none;
   }
   #isos.iso-flex .iso-md-1 {
-    flex: 0 0 8.3333333333%;
-    max-width: 8.3333333333%;
+    flex: 0 0 100%;
+    max-width: 100%;
   }
   #isos.iso-flex .iso-md-2 {
-    flex: 0 0 16.6666666667%;
-    max-width: 16.6666666667%;
-  }
-  #isos.iso-flex .iso-md-3 {
-    flex: 0 0 25%;
-    max-width: 25%;
-  }
-  #isos.iso-flex .iso-md-4 {
-    flex: 0 0 33.3333333333%;
-    max-width: 33.3333333333%;
-  }
-  #isos.iso-flex .iso-md-5 {
-    flex: 0 0 41.6666666667%;
-    max-width: 41.6666666667%;
-  }
-  #isos.iso-flex .iso-md-6 {
     flex: 0 0 50%;
     max-width: 50%;
   }
+  #isos.iso-flex .iso-md-3 {
+    flex: 0 0 33.3333333333%;
+    max-width: 33.3333333333%;
+  }
+  #isos.iso-flex .iso-md-4 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+  #isos.iso-flex .iso-md-5 {
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+  #isos.iso-flex .iso-md-6 {
+    flex: 0 0 16.6666666667%;
+    max-width: 16.6666666667%;
+  }
   #isos.iso-flex .iso-md-7 {
-    flex: 0 0 58.3333333333%;
-    max-width: 58.3333333333%;
+    flex: 0 0 14.2857142857%;
+    max-width: 14.2857142857%;
   }
   #isos.iso-flex .iso-md-8 {
-    flex: 0 0 66.6666666667%;
-    max-width: 66.6666666667%;
+    flex: 0 0 12.5%;
+    max-width: 12.5%;
   }
   #isos.iso-flex .iso-md-9 {
-    flex: 0 0 75%;
-    max-width: 75%;
+    flex: 0 0 11.1111111111%;
+    max-width: 11.1111111111%;
   }
   #isos.iso-flex .iso-md-10 {
-    flex: 0 0 83.3333333333%;
-    max-width: 83.3333333333%;
+    flex: 0 0 10%;
+    max-width: 10%;
   }
   #isos.iso-flex .iso-md-11 {
-    flex: 0 0 91.6666666667%;
-    max-width: 91.6666666667%;
+    flex: 0 0 9.0909090909%;
+    max-width: 9.0909090909%;
   }
   #isos.iso-flex .iso-md-12 {
-    flex: 0 0 100%;
-    max-width: 100%;
+    flex: 0 0 8.3333333333%;
+    max-width: 8.3333333333%;
   }
 }
 @media (min-width: 992px) {
@@ -556,52 +559,52 @@
     max-width: none;
   }
   #isos.iso-flex .iso-lg-1 {
-    flex: 0 0 8.3333333333%;
-    max-width: 8.3333333333%;
+    flex: 0 0 100%;
+    max-width: 100%;
   }
   #isos.iso-flex .iso-lg-2 {
-    flex: 0 0 16.6666666667%;
-    max-width: 16.6666666667%;
-  }
-  #isos.iso-flex .iso-lg-3 {
-    flex: 0 0 25%;
-    max-width: 25%;
-  }
-  #isos.iso-flex .iso-lg-4 {
-    flex: 0 0 33.3333333333%;
-    max-width: 33.3333333333%;
-  }
-  #isos.iso-flex .iso-lg-5 {
-    flex: 0 0 41.6666666667%;
-    max-width: 41.6666666667%;
-  }
-  #isos.iso-flex .iso-lg-6 {
     flex: 0 0 50%;
     max-width: 50%;
   }
+  #isos.iso-flex .iso-lg-3 {
+    flex: 0 0 33.3333333333%;
+    max-width: 33.3333333333%;
+  }
+  #isos.iso-flex .iso-lg-4 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+  #isos.iso-flex .iso-lg-5 {
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+  #isos.iso-flex .iso-lg-6 {
+    flex: 0 0 16.6666666667%;
+    max-width: 16.6666666667%;
+  }
   #isos.iso-flex .iso-lg-7 {
-    flex: 0 0 58.3333333333%;
-    max-width: 58.3333333333%;
+    flex: 0 0 14.2857142857%;
+    max-width: 14.2857142857%;
   }
   #isos.iso-flex .iso-lg-8 {
-    flex: 0 0 66.6666666667%;
-    max-width: 66.6666666667%;
+    flex: 0 0 12.5%;
+    max-width: 12.5%;
   }
   #isos.iso-flex .iso-lg-9 {
-    flex: 0 0 75%;
-    max-width: 75%;
+    flex: 0 0 11.1111111111%;
+    max-width: 11.1111111111%;
   }
   #isos.iso-flex .iso-lg-10 {
-    flex: 0 0 83.3333333333%;
-    max-width: 83.3333333333%;
+    flex: 0 0 10%;
+    max-width: 10%;
   }
   #isos.iso-flex .iso-lg-11 {
-    flex: 0 0 91.6666666667%;
-    max-width: 91.6666666667%;
+    flex: 0 0 9.0909090909%;
+    max-width: 9.0909090909%;
   }
   #isos.iso-flex .iso-lg-12 {
-    flex: 0 0 100%;
-    max-width: 100%;
+    flex: 0 0 8.3333333333%;
+    max-width: 8.3333333333%;
   }
 }
 @media (min-width: 1200px) {
@@ -616,51 +619,52 @@
     max-width: none;
   }
   #isos.iso-flex .iso-xl-1 {
-    flex: 0 0 8.3333333333%;
-    max-width: 8.3333333333%;
-  }
-  #isos.iso-flex .iso-xl-2 {
-    flex: 0 0 16.6666666667%;
-    max-width: 16.6666666667%;
-  }
-  #isos.iso-flex .iso-xl-3 {
-    flex: 0 0 25%;
-    max-width: 25%;
-  }
-  #isos.iso-flex .iso-xl-4 {
-    flex: 0 0 33.3333333333%;
-    max-width: 33.3333333333%;
-  }
-  #isos.iso-flex .iso-xl-5 {
-    flex: 0 0 41.6666666667%;
-    max-width: 41.6666666667%;
-  }
-  #isos.iso-flex .iso-xl-6 {
-    flex: 0 0 50%;
-    max-width: 50%;
-  }
-  #isos.iso-flex .iso-xl-7 {
-    flex: 0 0 58.3333333333%;
-    max-width: 58.3333333333%;
-  }
-  #isos.iso-flex .iso-xl-8 {
-    flex: 0 0 66.6666666667%;
-    max-width: 66.6666666667%;
-  }
-  #isos.iso-flex .iso-xl-9 {
-    flex: 0 0 75%;
-    max-width: 75%;
-  }
-  #isos.iso-flex .iso-xl-10 {
-    flex: 0 0 83.3333333333%;
-    max-width: 83.3333333333%;
-  }
-  #isos.iso-flex .iso-xl-11 {
-    flex: 0 0 91.6666666667%;
-    max-width: 91.6666666667%;
-  }
-  #isos.iso-flex .iso-xl-12 {
     flex: 0 0 100%;
     max-width: 100%;
   }
+  #isos.iso-flex .iso-xl-2 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+  #isos.iso-flex .iso-xl-3 {
+    flex: 0 0 33.3333333333%;
+    max-width: 33.3333333333%;
+  }
+  #isos.iso-flex .iso-xl-4 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+  #isos.iso-flex .iso-xl-5 {
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+  #isos.iso-flex .iso-xl-6 {
+    flex: 0 0 16.6666666667%;
+    max-width: 16.6666666667%;
+  }
+  #isos.iso-flex .iso-xl-7 {
+    flex: 0 0 14.2857142857%;
+    max-width: 14.2857142857%;
+  }
+  #isos.iso-flex .iso-xl-8 {
+    flex: 0 0 12.5%;
+    max-width: 12.5%;
+  }
+  #isos.iso-flex .iso-xl-9 {
+    flex: 0 0 11.1111111111%;
+    max-width: 11.1111111111%;
+  }
+  #isos.iso-flex .iso-xl-10 {
+    flex: 0 0 10%;
+    max-width: 10%;
+  }
+  #isos.iso-flex .iso-xl-11 {
+    flex: 0 0 9.0909090909%;
+    max-width: 9.0909090909%;
+  }
+  #isos.iso-flex .iso-xl-12 {
+    flex: 0 0 8.3333333333%;
+    max-width: 8.3333333333%;
+  }
 }
+/*# sourceMappingURL=jquery.isolate.css.map */
