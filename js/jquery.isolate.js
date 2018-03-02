@@ -6,8 +6,8 @@
  * http://opensource.org/licenses/MIT
  * 
  * Author: Adam J De Lucia
- * Version: 2.0.0
- * Date: March 1, 2018
+ * Version: 2.0.1
+ * Date: March 2, 2018
  * 
  */
 var isolate;
@@ -189,6 +189,9 @@ var IsolatePlugin = (function () {
 IsolatePlugin.NAME = 'isolate';
 (function ($) {
     $.fn[IsolatePlugin.NAME] = function (options) {
-        this.each(new IsolatePlugin(this, options));
+        var _this = this;
+        this.each(function () {
+            new IsolatePlugin(_this, options);
+        });
     };
 })(jQuery);

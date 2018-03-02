@@ -358,7 +358,10 @@ class IsolatePlugin {
 
     $.fn[IsolatePlugin.NAME] = function (options: IIsolateOptions) {
 
-        this.each(new IsolatePlugin(this, options));
+        this.each(() => {
+
+            new IsolatePlugin(this, options);
+        });
     };
 
 })(jQuery);
