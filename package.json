@@ -14,11 +14,11 @@
   "author": "Adam De Lucia",
   "license": "MIT",
   "dependencies": {
-    "jquery": "^1.10.33"
+    "jquery": "~>3.2.0"
   },
   "devDependencies": {
     "@types/jasmine": "~2.6.0",
-    "@types/jquery": "^1.10.33",
+    "@types/jquery": "~>3.2.0",
     "jasmine-core": "~2.8.0",
     "karma": "~1.7.1",
     "karma-jasmine": "~1.1.0",
