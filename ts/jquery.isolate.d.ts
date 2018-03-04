@@ -6,6 +6,7 @@ export interface IIsolateOptions {
     filterClass: string;
     iso: string;
     isoGrid: boolean;
+    flex: boolean;
     bootstrap: boolean;
     version: number | string | any;
     breakpoint: string;

@@ -1,7 +1,5 @@
 ﻿declare var $: any;
 
-var isolate: IsolatePlugin;
-
 import { IIsolateDefaultSettings, IIsolateOptions, IFiltersMap } from './jquery.isolate.d';
 
 class IsolateDefaultSettings implements IIsolateDefaultSettings {
@@ -18,8 +16,9 @@ class IsolateDefaultSettings implements IIsolateDefaultSettings {
             filterClass: '.filter',
             iso: 'li',
             isoGrid: false,
+            flex: true,
             bootstrap: true,
-            version: 3,
+            version: 4,
             breakpoint: 'md',
             bsSpan: 3,
             columns: 4,
@@ -57,8 +56,6 @@ class IsolatePlugin {
 
 
     constructor(rootElement: JQuery, options: IIsolateOptions) {
-
-        isolate = this;
 
         this.rootElement = rootElement;
 
@@ -100,143 +97,143 @@ class IsolatePlugin {
 
 
     // Isolate method
-    private isolate() {
+    private isolate = (event: any) => {
 
-        let selectedFilter: string = $(this).attr('id');
+        let selectedFilter: string = $(event.currentTarget).attr('id');
         let isoClass: string = '.' + selectedFilter;
         let filterID: string = '#' + selectedFilter;
 
         // Callback function before any filter actions begin
-        $.isFunction(isolate.settings.start) && isolate.settings.start.call(this, isolate.filtersMap, selectedFilter);
+        $.isFunction(this.settings.start) && this.settings.start.call(event.currentTarget, this.filtersMap, selectedFilter);
 
-        $(isolate.instanceID).trigger('isolate.start', [this, isolate.filtersMap, selectedFilter]);
+        $(this.instanceID).trigger('isolate.start', [event.currentTarget, this.filtersMap, selectedFilter]);
 
         // Resets all iso-els before isolating the selected ones
-        isolate.settings.filteredList.find(isolate.settings.iso).show();
+        this.settings.filteredList.find(this.settings.iso).show();
 
         // Handles faceted isolation
-        for (let _filter in isolate.filtersMap) {
+        for (let _filter in this.filtersMap) {
 
-            if (_filter === selectedFilter && isolate.filtersMap[_filter] === 'isInactive') {
+            if (_filter === selectedFilter && this.filtersMap[_filter] === 'isInactive') {
 
                 // Adds the selected class to the array of isolated elements
-                isolate.isolatedEls.push(isoClass);
+                this.isolatedEls.push(isoClass);
 
                 // Isolates the selected elements
-                isolate.settings.filteredList.find($(isolate.settings.iso).not(isolate.isolatedEls.toString())).hide();
+                this.settings.filteredList.find($(this.settings.iso).not(this.isolatedEls.toString())).hide();
 
                 // Sets the filter state
-                isolate.filtersMap[_filter] = 'isActive';
+                this.filtersMap[_filter] = 'isActive';
 
                 // Sets the active filter styles
-                isolate.settings.filters.find(filterID).addClass('active');
+                this.settings.filters.find(filterID).addClass('active');
 
                 break;
 
-            } else if (_filter === selectedFilter && isolate.filtersMap[_filter] === 'isActive') {
+            } else if (_filter === selectedFilter && this.filtersMap[_filter] === 'isActive') {
 
                 // Finds the selected active class in the array of isolated elements
-                for (let i: number = 0, l: number = isolate.isolatedEls.length; i < l; i++) {
+                for (let i: number = 0, l: number = this.isolatedEls.length; i < l; i++) {
 
-                    if (isolate.isolatedEls[i] === isoClass) {
+                    if (this.isolatedEls[i] === isoClass) {
 
                         // Removes the class from the array
-                        isolate.isolatedEls.splice(i, 1);
+                        this.isolatedEls.splice(i, 1);
 
                         break;
                     }
                 }
 
                 // Isolates the selected elements if the array is not empty
-                if (isolate.isolatedEls.length) {
+                if (this.isolatedEls.length) {
 
-                    isolate.settings.filteredList.find($(isolate.settings.iso).not(isolate.isolatedEls.toString())).hide();
+                    this.settings.filteredList.find($(this.settings.iso).not(this.isolatedEls.toString())).hide();
                 }
 
                 // Sets the filter state
-                isolate.filtersMap[_filter] = 'isInactive';
+                this.filtersMap[_filter] = 'isInactive';
 
                 // Sets inactive filter styles
-                isolate.settings.filters.find(filterID).removeClass('active');
+                this.settings.filters.find(filterID).removeClass('active');
 
                 break;
             }
         }
 
         // Callback function after all filter actions are complete
-        $.isFunction(isolate.settings.complete) && isolate.settings.complete.call(this, isolate.filtersMap, selectedFilter, isolate.isolatedEls);
+        $.isFunction(this.settings.complete) && this.settings.complete.call(event.currentTarget, this.filtersMap, selectedFilter, this.isolatedEls);
 
-        $(isolate.instanceID).trigger('isolate.complete', [this, isolate.filtersMap, selectedFilter, isolate.isolatedEls]);
+        $(this.instanceID).trigger('isolate.complete', [event.currentTarget, this.filtersMap, selectedFilter, this.isolatedEls]);
     }
 
     // Filter method
-    private filter() {
+    private filter = (event: any) => {
 
-        let selectedFilter: string = $(this).attr('id');
+        let selectedFilter: string = $(event.currentTarget).attr('id');
         let isoClass: string = '.' + selectedFilter;
         let filterID: string = '#' + selectedFilter;
 
         // Callback function before any filter actions begin
-        $.isFunction(isolate.settings.start) && isolate.settings.start.call(this, isolate.filtersMap, selectedFilter);
+        $.isFunction(this.settings.start) && this.settings.start.call(event.currentTarget, this.filtersMap, selectedFilter);
 
-        $(isolate.instanceID).trigger('isolate.filter.start', [this, isolate.filtersMap, selectedFilter]);
+        $(this.instanceID).trigger('isolate.filter.start', [event.currentTarget, this.filtersMap, selectedFilter]);
 
         // Resets all iso-els before filtering the selected ones
-        isolate.settings.filteredList.find(isolate.settings.iso).show();
+        this.settings.filteredList.find(this.settings.iso).show();
 
         // Handles faceted filtering
-        for (let _filter in isolate.filtersMap) {
+        for (let _filter in this.filtersMap) {
 
-            if (_filter === selectedFilter && isolate.filtersMap[_filter] === 'isInactive') {
+            if (_filter === selectedFilter && this.filtersMap[_filter] === 'isInactive') {
 
                 // Adds the selected class to the array of filtered elements
-                isolate.filteredEls.push(isoClass);
+                this.filteredEls.push(isoClass);
 
                 // Filters the selected elements
-                isolate.settings.filteredList.find(isolate.filteredEls.toString()).hide();
+                this.settings.filteredList.find(this.filteredEls.toString()).hide();
 
                 // Sets the filter state
-                isolate.filtersMap[_filter] = 'isActive';
+                this.filtersMap[_filter] = 'isActive';
 
                 // Sets the active filter styles
-                isolate.settings.filters.find(filterID).addClass('active');
+                this.settings.filters.find(filterID).addClass('active');
 
                 break;
 
-            } else if (_filter === selectedFilter && isolate.filtersMap[_filter] === 'isActive') {
+            } else if (_filter === selectedFilter && this.filtersMap[_filter] === 'isActive') {
 
                 // Finds the selected active class in the array of filtered elements
-                for (let i: number = 0, l: number = isolate.filteredEls.length; i < l; i++) {
+                for (let i: number = 0, l: number = this.filteredEls.length; i < l; i++) {
 
-                    if (isolate.filteredEls[i] === isoClass) {
+                    if (this.filteredEls[i] === isoClass) {
 
                         // Removes the class from the array
-                        isolate.filteredEls.splice(i, 1);
+                        this.filteredEls.splice(i, 1);
 
                         break;
                     }
                 }
 
                 // Filters the selected elements if the array is not empty
-                if (isolate.filteredEls.length) {
+                if (this.filteredEls.length) {
 
-                    isolate.settings.filteredList.find(isolate.filteredEls.toString()).hide();
+                    this.settings.filteredList.find(this.filteredEls.toString()).hide();
                 }
 
                 // Sets the filter state
-                isolate.filtersMap[_filter] = 'isInactive';
+                this.filtersMap[_filter] = 'isInactive';
 
                 // Sets inactive filter styles
-                isolate.settings.filters.find(filterID).removeClass('active');
+                this.settings.filters.find(filterID).removeClass('active');
 
                 break;
             }
         }
 
         // Callback function after all filter actions are complete
-        $.isFunction(isolate.settings.complete) && isolate.settings.complete.call(this, isolate.filtersMap, selectedFilter, isolate.filteredEls);
+        $.isFunction(this.settings.complete) && this.settings.complete.call(event.currentTarget, this.filtersMap, selectedFilter, this.filteredEls);
 
-        $(isolate.instanceID).trigger('isolate.filter.complete', [this, isolate.filtersMap, selectedFilter, isolate.filteredEls]);
+        $(this.instanceID).trigger('isolate.filter.complete', [event.currentTarget, this.filtersMap, selectedFilter, this.filteredEls]);
     }
 
     // Evaluates what scaffolding system, if any, was called and takes the appropriate action
@@ -280,6 +277,13 @@ class IsolatePlugin {
 
             let isValid: boolean = true;
 
+            if (this.settings.bootstrap && this.majorVersion !== 3 && this.majorVersion !== 4) {
+
+                alert('Isolate supports Bootstrap 3 and 4. You entered ' + this.majorVersion + '.\n\nPlease use a supported version or the Isolate grid.');
+
+                isValid = false;
+            }
+
             if (this.settings.bootstrap && this.majorVersion === 3) {
 
                 // Version 3 must have col, breakpoint and span
@@ -293,7 +297,7 @@ class IsolatePlugin {
                 // Validates breakpoint
                 if (isValid && ['xs', 'sm', 'md', 'lg'].indexOf($.trim(this.settings.breakpoint)) === -1) {
 
-                    alert('Bootstrap 3 supports breakpoints xs, sm, md and lg. You entered ' + this.settings.breakpoint + '.\n\n Please use a supported breakpoint.');
+                    alert('Bootstrap 3 supports breakpoints xs, sm, md and lg. You entered ' + this.settings.breakpoint + '.\n\nPlease use a supported breakpoint.');
 
                     isValid = false;
                 }
@@ -301,7 +305,7 @@ class IsolatePlugin {
                 // Validates span
                 if (isValid && isNaN(this.settings.bsSpan)) {
 
-                    alert('Bootstrap 3 supports numbers for bsSpan. You entered ' + this.settings.bsSpan + '.\n\n Please enter a supported bsSpan as a number or string.');
+                    alert('Bootstrap 3 supports numbers for bsSpan. You entered ' + this.settings.bsSpan + '.\n\nPlease enter a supported bsSpan as a number or string.');
 
                     isValid = false;
                 }
@@ -310,9 +314,9 @@ class IsolatePlugin {
             if (this.settings.bootstrap && this.majorVersion === 4) {
 
                 // Validates breakpoint
-                if (isValid && this.settings.breakpoint !== null && $.trim(this.settings.breakpoint) !== '' && ['xs', 'sm', 'md', 'lg', 'xl'].indexOf($.trim(this.settings.breakpoint)) === -1) {
+                if (isValid && this.settings.breakpoint !== null && $.trim(this.settings.breakpoint) !== '' && ['sm', 'md', 'lg', 'xl'].indexOf($.trim(this.settings.breakpoint)) === -1) {
 
-                    alert('Bootstrap 4 supports breakpoints xs, sm, md, lg and xl. You entered ' + this.settings.breakpoint + '.\n\n Please use a supported breakpoint.');
+                    alert('Bootstrap 4 supports breakpoints sm, md, lg and xl. You entered ' + this.settings.breakpoint + '.\n\nPlease use a supported breakpoint.');
 
                     isValid = false;
                 }
@@ -322,17 +326,65 @@ class IsolatePlugin {
 
                     if (isValid && typeof this.settings.bsSpan !== 'number' && typeof this.settings.bsSpan !== 'string') {
 
-                        alert('Bootstrap 4 supports only a number or auto for bsSpan. You entered ' + this.settings.bsSpan + '.\n\n Please enter a supported bsSpan as a number or string. Also, null or an empty string is valid.');
+                        alert('Bootstrap 4 supports only a number or auto for bsSpan. The type you entered is ' + typeof this.settings.bsSpan + '.\n\nPlease enter a supported bsSpan as a number or string. Also, null or an empty string is valid.');
 
                         isValid = false;
                     }
 
                     if (isValid && typeof this.settings.bsSpan === 'string' && this.settings.bsSpan !== 'auto' && isNaN(Number(this.settings.bsSpan))) {
 
-                        alert('Bootstrap 4 supports only a number or auto for bsSpan. You entered ' + this.settings.bsSpan + '.\n\n Please enter a supported bsSpan as a number or string. Also, null or an empty string is valid.');
+                        alert('Bootstrap 4 supports only a number or auto for bsSpan. You entered ' + this.settings.bsSpan + '.\n\nPlease enter a supported bsSpan as a number or string. Also, null or an empty string is valid.');
 
                         isValid = false;
                     }
+                }
+            }
+
+            if (this.settings.isoGrid && this.settings.flex) {
+
+                // Validates breakpoint
+                if (isValid && this.settings.breakpoint !== null && $.trim(this.settings.breakpoint) !== '' && ['sm', 'md', 'lg', 'xl'].indexOf($.trim(this.settings.breakpoint)) === -1) {
+
+                    alert('Isolate flex grid supports breakpoints sm, md, lg and xl. You entered ' + this.settings.breakpoint + '.\n\nPlease use a supported breakpoint.');
+
+                    isValid = false;
+                }
+
+                // Validates span
+                if (isValid && this.settings.columns !== null && $.trim(this.settings.columns) !== '') {
+
+                    if (isValid && typeof this.settings.columns !== 'number' && typeof this.settings.columns !== 'string') {
+
+                        alert('Isolate flex grid supports only a number or string for columns. The type you entered is ' + typeof this.settings.columns + '.\n\nPlease enter a supported value as a number or string. Also, null or an empty string is valid.');
+
+                        isValid = false;
+                    }
+
+                    if (isValid && typeof this.settings.columns === 'string' && this.settings.columns !== 'auto' && isNaN(Number(this.settings.columns))) {
+
+                        alert('Isolate flex grid supports only a number or auto for columns. You entered ' + this.settings.columns + '.\n\nPlease enter a supported value as a number or string. Also, null or an empty string is valid.');
+
+                        isValid = false;
+                    }
+                }
+            }
+
+            if (this.settings.isoGrid && !this.settings.flex) {
+
+                // Validates breakpoint
+                if (isValid && this.settings.breakpoint !== null && $.trim(this.settings.breakpoint) !== '' && ['sm', 'md', 'lg', 'xl'].indexOf($.trim(this.settings.breakpoint)) === -1) {
+
+                    alert('Isolate grid supports breakpoints sm, md, lg and xl. You entered ' + this.settings.breakpoint + '.\n\nPlease use a supported breakpoint.');
+
+                    isValid = false;
+                }
+
+                // Validates span
+                if (isValid && isNaN(this.settings.columns)) {
+
+                    alert('Isolate grid supports numbers for columns. You entered ' + this.settings.columns + '.\n\nPlease enter a supported value as a number or string.');
+
+                    isValid = false;
                 }
             }
         }

@@ -7,12 +7,12 @@
  * http://opensource.org/licenses/MIT
  * 
  * Author: Adam J De Lucia
- * Version: 2.0.1
- * Date: March 2, 2018
+ * Version: 2.0.2
+ * Date: March 3, 2018
  * 
  */
 
-#isos:not(.iso-flex) {
+.iso-grid:not(.grid-flex) {
     margin: 0 -15px;
     padding: 0;
 
@@ -26,7 +26,7 @@
         clear: both;
     }
 
-    .iso-xs-1, .iso-sm-1, .iso-md-1, .iso-lg-1, .iso-xs-2, .iso-sm-2, .iso-md-2, .iso-lg-2, .iso-xs-3, .iso-sm-3, .iso-md-3, .iso-lg-3, .iso-xs-4, .iso-sm-4, .iso-md-4, .iso-lg-4, .iso-xs-5, .iso-sm-5, .iso-md-5, .iso-lg-5, .iso-xs-6, .iso-sm-6, .iso-md-6, .iso-lg-6, .iso-xs-7, .iso-sm-7, .iso-md-7, .iso-lg-7, .iso-xs-8, .iso-sm-8, .iso-md-8, .iso-lg-8, .iso-xs-9, .iso-sm-9, .iso-md-9, .iso-lg-9, .iso-xs-10, .iso-sm-10, .iso-md-10, .iso-lg-10, .iso-xs-11, .iso-sm-11, .iso-md-11, .iso-lg-11, .iso-xs-12, .iso-sm-12, .iso-md-12, .iso-lg-12 {
+    [class*="iso-"] {
         position: relative;
         min-height: 1px;
         -webkit-box-sizing: border-box;
@@ -36,59 +36,59 @@
         padding-right: 15px;
     }
 
-    .iso-xs-1, .iso-xs-2, .iso-xs-3, .iso-xs-4, .iso-xs-5, .iso-xs-6, .iso-xs-7, .iso-xs-8, .iso-xs-9, .iso-xs-10, .iso-xs-11, .iso-xs-12 {
+    .iso-1, .iso-2, .iso-3, .iso-4, .iso-5, .iso-6, .iso-7, .iso-8, .iso-9, .iso-10, .iso-11, .iso-12 {
         float: left;
     }
 
-    .iso-xs-1 {
+    .iso-1 {
         width: 100%;
     }
 
-    .iso-xs-2 {
+    .iso-2 {
         width: 50%;
     }
 
-    .iso-xs-3 {
+    .iso-3 {
         width: 33.3333333333%;
     }
 
-    .iso-xs-4 {
+    .iso-4 {
         width: 25%;
     }
 
-    .iso-xs-5 {
+    .iso-5 {
         width: 20%;
     }
 
-    .iso-xs-6 {
+    .iso-6 {
         width: 16.6666666667%;
     }
 
-    .iso-xs-7 {
+    .iso-7 {
         width: 14.2857142857%;
     }
 
-    .iso-xs-8 {
+    .iso-8 {
         width: 12.5%;
     }
 
-    .iso-xs-9 {
+    .iso-9 {
         width: 11.1111111111%;
     }
 
-    .iso-xs-10 {
+    .iso-10 {
         width: 10%;
     }
 
-    .iso-xs-11 {
+    .iso-11 {
         width: 9.0909090909%;
     }
 
-    .iso-xs-12 {
+    .iso-12 {
         width: 8.3333333333%;
     }
 
-    @media (min-width: 768px) {
+    @media (min-width: 576px) {
         .iso-sm-1, .iso-sm-2, .iso-sm-3, .iso-sm-4, .iso-sm-5, .iso-sm-6, .iso-sm-7, .iso-sm-8, .iso-sm-9, .iso-sm-10, .iso-sm-11, .iso-sm-12 {
             float: left;
         }
@@ -142,7 +142,7 @@
         }
     }
 
-    @media (min-width: 992px) {
+    @media (min-width: 768px) {
         .iso-md-1, .iso-md-2, .iso-md-3, .iso-md-4, .iso-md-5, .iso-md-6, .iso-md-7, .iso-md-8, .iso-md-9, .iso-md-10, .iso-md-11, .iso-md-12 {
             float: left;
         }
@@ -196,7 +196,7 @@
         }
     }
 
-    @media (min-width: 1200px) {
+    @media (min-width: 992px) {
         .iso-lg-1, .iso-lg-2, .iso-lg-3, .iso-lg-4, .iso-lg-5, .iso-lg-6, .iso-lg-7, .iso-lg-8, .iso-lg-9, .iso-lg-10, .iso-lg-11, .iso-lg-12 {
             float: left;
         }
@@ -249,15 +249,70 @@
             width: 8.3333333333%;
         }
     }
+
+    @media (min-width: 1200px) {
+        .iso-xl-1, .iso-xl-2, .iso-xl-3, .iso-xl-4, .iso-xl-5, .iso-xl-6, .iso-xl-7, .iso-xl-8, .iso-xl-9, .iso-xl-10, .iso-xl-11, .iso-xl-12 {
+            float: left;
+        }
+
+        .iso-xl-1 {
+            width: 100%;
+        }
+
+        .iso-xl-2 {
+            width: 50%;
+        }
+
+        .iso-xl-3 {
+            width: 33.3333333333%;
+        }
+
+        .iso-xl-4 {
+            width: 25%;
+        }
+
+        .iso-xl-5 {
+            width: 20%;
+        }
+
+        .iso-xl-6 {
+            width: 16.6666666667%;
+        }
+
+        .iso-xl-7 {
+            width: 14.2857142857%;
+        }
+
+        .iso-xl-8 {
+            width: 12.5%;
+        }
+
+        .iso-xl-9 {
+            width: 11.1111111111%;
+        }
+
+        .iso-xl-10 {
+            width: 10%;
+        }
+
+        .iso-xl-11 {
+            width: 9.0909090909%;
+        }
+
+        .iso-xl-12 {
+            width: 8.3333333333%;
+        }
+    }
 }
 
-#isos.iso-flex {
+.iso-grid.grid-flex {
     display: flex;
     flex-wrap: wrap;
     margin-right: -15px;
     margin-left: -15px;
 
-    .iso-1, .iso-2, .iso-3, .iso-4, .iso-5, .iso-6, .iso-7, .iso-8, .iso-9, .iso-10, .iso-11, .iso-12, .iso, .iso-auto, .iso-sm-1, .iso-sm-2, .iso-sm-3, .iso-sm-4, .iso-sm-5, .iso-sm-6, .iso-sm-7, .iso-sm-8, .iso-sm-9, .iso-sm-10, .iso-sm-11, .iso-sm-12, .iso-sm, .iso-sm-auto, .iso-md-1, .iso-md-2, .iso-md-3, .iso-md-4, .iso-md-5, .iso-md-6, .iso-md-7, .iso-md-8, .iso-md-9, .iso-md-10, .iso-md-11, .iso-md-12, .iso-md, .iso-md-auto, .iso-lg-1, .iso-lg-2, .iso-lg-3, .iso-lg-4, .iso-lg-5, .iso-lg-6, .iso-lg-7, .iso-lg-8, .iso-lg-9, .iso-lg-10, .iso-lg-11, .iso-lg-12, .iso-lg, .iso-lg-auto, .iso-xl-1, .iso-xl-2, .iso-xl-3, .iso-xl-4, .iso-xl-5, .iso-xl-6, .iso-xl-7, .iso-xl-8, .iso-xl-9, .iso-xl-10, .iso-xl-11, .iso-xl-12, .iso-xl, .iso-xl-auto {
+    .iso,
+    [class*="iso-"] {
         position: relative;
         width: 100%;
         min-height: 1px;
